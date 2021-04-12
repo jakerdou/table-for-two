@@ -1,0 +1,42 @@
+:root {
+  --qd-purple: #c530c5;
+  --qd-green: #21d35d;
+}
+
+.app {
+  text-align: center;
+  background-image: linear-gradient(#FFFFFF, #b8b8b8);
+  color: black;
+  font-family: "Times New Roman";
+  font-size: 1.1em;
+}
+
+.month-chart {
+  margin-top: 10%;
+}
+
+.current-month-label {
+  font-size: 2em;
+
+}
+
+.current-month-number {
+  font-size: 2em;
+  color: blue;
+}
+
+.bg-purp {
+  background-color: var(--qd-purple);
+}
+
+.page-title {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: var(--qd-green);
+  text-shadow: 2px 2px 8px #cfcfcf;
+}
+
+.btn {
+  background-color: var(--qd-green);
+  border-radius: 8px;
+}

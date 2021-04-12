@@ -12,7 +12,7 @@ function Home() {
     <Container className='home'>
         <Row>
             <Col>
-                Home
+                Table For Two
             </Col>
         </Row>
     </Container>

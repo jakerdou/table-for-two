@@ -1,1 +1,3 @@
-this is a finance web app that i made mainly for me to keep track of my expenses, but you're more than free to use it. hmu if you have questions
+1. run npm install
+2. run npm start to start frontend
+3. open new terminal and run node server.js to run backend

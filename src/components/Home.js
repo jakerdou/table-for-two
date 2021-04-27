@@ -11,6 +11,7 @@ function Home() {
 
   const [surveyStarted, setSurveyStarted] = useState(false);
   const [surveyCompleted, setSurveyCompleted] = useState(false);
+  const [sampleRestaurants, setSampleRestaurants] = useState([])
 
   const handleGetStartedClick = () => {
     setSurveyStarted(true);
@@ -27,12 +28,16 @@ function Home() {
       }
       {
         surveyStarted && !surveyCompleted
-        ? <Survey setSurveyCompleted={setSurveyCompleted} />
+        ? <Survey
+          sampleRestaurants={sampleRestaurants}
+          setSampleRestaurants={setSampleRestaurants}
+          setSurveyCompleted={setSurveyCompleted}
+        />
         : null
       }
       {
         surveyCompleted
-        ? <Recommendations />
+        ? <Recommendations sampleRestaurants={sampleRestaurants} />
         : null
       }
     </Container>

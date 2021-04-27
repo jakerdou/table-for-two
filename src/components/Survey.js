@@ -5,10 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function Survey({ setSurveyCompleted }) {
-  console.log('in survey');
-
-  const [sampleRestaurants, setSampleRestaurants] = useState([])
+function Survey({ sampleRestaurants, setSampleRestaurants, setSurveyCompleted }) {
+  // console.log('in survey');
 
   const getRestaurants = () => {
     fetch(`http://localhost:5000/get_restaurants`, {
@@ -27,20 +25,7 @@ function Survey({ setSurveyCompleted }) {
     getRestaurants();
   }, [])
 
-  const getRecommendations = () => {
-    fetch(`http://localhost:5000/get_recommendations`, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(sampleRestaurants)
-        // body: {sample_ratings: {rest1: 5, rest2: 3, rest3: 1}}
-    })
-    .then(res => res.text())
-    .then(res => console.log(JSON.parse(res)))
-    .catch(err => err);
-  }
+
 
   const handleRatingChange = e => {
     // console.log(e.target.value, e.target.id);
@@ -54,9 +39,9 @@ function Survey({ setSurveyCompleted }) {
   }
 
   const restaurantList = () => {
-    console.log('in restaurant list');
+    // console.log('in restaurant list');
     return sampleRestaurants.map((sampleRestaurant, idx) => {
-      console.log(sampleRestaurant);
+      // console.log(sampleRestaurant);
       return (
         <Card>
           {sampleRestaurant.name}
@@ -79,10 +64,14 @@ function Survey({ setSurveyCompleted }) {
     <Container className='survey'>
       {
         sampleRestaurants.length > 0
-        ? restaurantList()
+        ? (
+          <div>
+            {restaurantList()}
+            <Button onClick={() => {setSurveyCompleted(true)}}>Submit</Button>
+          </div>
+        )
         : 'Loading...'
       }
-      <Button onClick={() => {setSurveyCompleted(true)}}>Submit</Button>
     </Container>
   );
 }

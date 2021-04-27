@@ -5,18 +5,16 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 import Survey from './Survey';
-
-const dummySampleRestaurants = [
-  ["restaurant1", "restaurant2", "restaurant3", "restaurant4", "restaurant5"],
-  ["restaurant6", "restaurant2", "restaurant3", "restaurant4", "restaurant5"],
-  ["restaurant7", "restaurant2", "restaurant3", "restaurant4", "restaurant5"],
-  ["restaurant8", "restaurant2", "restaurant3", "restaurant4", "restaurant5"],
-  ["restaurant9", "restaurant2", "restaurant3", "restaurant4", "restaurant5"]
-]
+import Recommendations from './Recommendations';
 
 function Home() {
 
   const [surveyStarted, setSurveyStarted] = useState(false);
+  const [surveyCompleted, setSurveyCompleted] = useState(false);
+
+  const handleGetStartedClick = () => {
+    setSurveyStarted(true);
+  }
 
   return (
     <Container className='home'>
@@ -24,12 +22,17 @@ function Home() {
       <div>"The best restaurants, the cleanest bathrooms"</div>
       {
         !surveyStarted
-        ? <Button onClick={() => {setSurveyStarted(true)}}>Click here to get started!</Button>
+        ? <Button onClick={handleGetStartedClick}>Click here to get started!</Button>
         : null
       }
       {
-        surveyStarted
-        ? <Survey sampleRestaurants={dummySampleRestaurants} />
+        surveyStarted && !surveyCompleted
+        ? <Survey setSurveyCompleted={setSurveyCompleted} />
+        : null
+      }
+      {
+        surveyCompleted
+        ? <Recommendations />
         : null
       }
     </Container>

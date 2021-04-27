@@ -1,14 +1,4 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
 import numpy as np
-from random import randrange
-import pickle
-import time
-
-from mf import MF
-
-app = Flask(__name__)
-CORS(app)
 
 class MF:
     def __init__(self, train_mat, test_mat, latent=5, lr=0.01, reg=0.01):
@@ -92,58 +82,3 @@ class MF:
     def predict(self):
         prediction_mat = np.matmul(self.P, self.Q.T)
         return prediction_mat
-
-rating_data = np.load('rating_data.npy')
-mf = MF(rating_data, rating_data)
-_, _ = mf.train(epoch=20, verbose=False)
-
-num_total_rest = 80
-
-restaurants = pickle.load(open('restaurants.dict', 'rb'))
-# print(restaurants)
-
-@app.route('/get_restaurants')
-def get_restaurants():
-    num_sample_rest = 5
-    rand_ints = []
-    while len(rand_ints) < 5:
-        rand_int = randrange(num_total_rest)
-        if not rand_int in rand_ints:
-            rand_ints.append(rand_int)
-
-    restaurant_ids = np.load('rest_filter.npy')
-
-    sample_ids = restaurant_ids[rand_ints]
-    sample_restaurants = []
-    for id in sample_ids:
-        restaurants[id].update({'rating': 1})
-        sample_restaurants.append(restaurants[id])
-
-    return jsonify(sample_restaurants)
-
-
-@app.route('/get_recommendations', methods=['POST'])
-def get_recommendations():
-    # print(mf.predict())
-    new_user = np.zeros(80)
-
-    sample_ratings = request.get_json()
-
-    for sample_rating in sample_ratings:
-        new_user[sample_rating['index']] = sample_rating['rating']
-
-    # print(new_user)
-    mf.add_new_user(new_user)
-    new_user_ratings = mf.predict()[-1]
-    print(new_user_ratings)
-
-    top_rating_idx = sorted(range(len(new_user_ratings)), key=lambda i: new_user_ratings[i])[-5:]
-    print(top_rating_idx)
-    top_restaurants = []
-    for id in restaurants.keys():
-        if restaurants[id]['index'] in top_rating_idx:
-            top_restaurants.append(restaurants[id])
-
-
-    # return jsonify({'key': 'value'})
-    return jsonify(top_restaurants)

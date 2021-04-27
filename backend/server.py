@@ -89,6 +89,12 @@ class MF:
 
         self.P = np.vstack([self.P, new_lf])
 
+        print('in MF')
+        print(len(self.P))
+
+    def remove_new_user(self):
+        self.P = np.delete(self.P, 168, 0)
+
     def predict(self):
         prediction_mat = np.matmul(self.P, self.Q.T)
         return prediction_mat
@@ -100,7 +106,6 @@ _, _ = mf.train(epoch=20, verbose=False)
 num_total_rest = 80
 
 restaurants = pickle.load(open('restaurants.dict', 'rb'))
-# print(restaurants)
 
 @app.route('/get_restaurants')
 def get_restaurants():
@@ -124,6 +129,7 @@ def get_restaurants():
 
 @app.route('/get_recommendations', methods=['POST'])
 def get_recommendations():
+    # TODO: make sure that the same restaurants dont get recommended as those that are in sample
     # print(mf.predict())
     new_user = np.zeros(80)
 
@@ -134,8 +140,9 @@ def get_recommendations():
 
     # print(new_user)
     mf.add_new_user(new_user)
+    # print(len(mf.P))
     new_user_ratings = mf.predict()[-1]
-    print(new_user_ratings)
+    # print(new_user_ratings)
 
     top_rating_idx = sorted(range(len(new_user_ratings)), key=lambda i: new_user_ratings[i])[-5:]
     print(top_rating_idx)
@@ -144,6 +151,9 @@ def get_recommendations():
         if restaurants[id]['index'] in top_rating_idx:
             top_restaurants.append(restaurants[id])
 
+    print(top_restaurants)
+
+    mf.remove_new_user()
 
     # return jsonify({'key': 'value'})
     return jsonify(top_restaurants)

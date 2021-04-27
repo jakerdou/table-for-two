@@ -17,13 +17,28 @@ const config = require('./frontend-config.json');
 
 function App() {
 
-  const testAPI = () => {
-    fetch(`${config.backend_url}/test-api`, {
+  const getRestaurants = () => {
+    fetch(`http://localhost:5000/get_restaurants`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
+    })
+    .then(res => res.text())
+    .then(res => console.log(JSON.parse(res)))
+    .catch(err => err);
+  }
+
+  const getRecommendations = () => {
+    fetch(`http://localhost:5000/get_recommendations`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({sample_ratings: {rest1: 5, rest2: 3, rest3: 1}})
+        // body: {sample_ratings: {rest1: 5, rest2: 3, rest3: 1}}
     })
     .then(res => res.text())
     .then(res => console.log(JSON.parse(res)))
@@ -41,6 +56,8 @@ function App() {
     <Router>
       <div className='app h-100'>
         <div className="mt-4">
+          <Button onClick={getRestaurants}>Get Restaurants</Button>
+          <Button onClick={getRecommendations}>Get Recommendations</Button>
           <Switch>
             <Route path="/home">
               <Home />

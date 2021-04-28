@@ -75,7 +75,7 @@ function Survey({ sampleRestaurants, setSampleRestaurants, setSurveyCompleted })
             </Button>
           </div>
         )
-        : <div className="mid-page padding-bottom">'Loading...'</div>
+        : <div className="mid-page padding-bottom animate">Loading...</div>
       }
     </Container>
   );

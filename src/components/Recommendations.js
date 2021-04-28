@@ -53,7 +53,7 @@ function Recommendations({ sampleRestaurants }) {
             {recommendationList()}
           </div>
         )
-        : <div className="mid-page padding-bottom">'Loading...'</div>
+        : <div className="mid-page padding-bottom animate">Loading...</div>
       }
     </Container>
   );

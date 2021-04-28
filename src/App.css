@@ -75,3 +75,14 @@
 .padding-bottom {
   padding-bottom: 50%;
 }
+
+@keyframes loading-animation {
+  from {color: var(--tft-grey);}
+  to {color: var(--tft-blue);}
+}
+
+.animate{
+  animation-name: loading-animation;
+  animation-duration: .5s;
+  font-size: 1.4em
+}

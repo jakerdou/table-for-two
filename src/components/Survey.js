@@ -44,7 +44,7 @@ function Survey({ sampleRestaurants, setSampleRestaurants, setSurveyCompleted })
       // console.log(sampleRestaurant);
       return (
         <Card>
-          {sampleRestaurant.name}
+          <div className="card-title">{sampleRestaurant.name}</div>
           <label>
             Rating:
             <select id={sampleRestaurant.name} value={sampleRestaurants[idx].rating} onChange={handleRatingChange} className="ml-2">
@@ -66,11 +66,16 @@ function Survey({ sampleRestaurants, setSampleRestaurants, setSurveyCompleted })
         sampleRestaurants.length > 0
         ? (
           <div>
+            <div className="info-text">
+              Please rate the following restaurants based on how much you think you would like them (with 5 being the highest and 1 being the lowest). This will help us build your profile and recommend the perfect restaurant for you.
+            </div>
             {restaurantList()}
-            <Button onClick={() => {setSurveyCompleted(true)}}>Submit</Button>
+            <Button onClick={() => {setSurveyCompleted(true); window.scrollTo(0,0);}} className="my-3">
+              Submit
+            </Button>
           </div>
         )
-        : 'Loading...'
+        : <div className="mid-page padding-bottom">'Loading...'</div>
       }
     </Container>
   );

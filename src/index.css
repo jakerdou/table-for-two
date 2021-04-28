@@ -1,4 +1,8 @@
-html, body, body>div {
+html {
+  height: auto;
+}
+
+body, body>div {
   height: 100%
 }
 

@@ -34,7 +34,7 @@ function Recommendations({ sampleRestaurants }) {
     return recommendations.map((recommendation, idx) => {
       // console.log(recommendation);
       return (
-        <Card>
+        <Card className="card-title">
           {recommendation.name}
         </Card>
       )
@@ -42,11 +42,18 @@ function Recommendations({ sampleRestaurants }) {
   }
 
   return (
-    <Container className='recommendations'>
+    <Container className='recommendations padding-bottom'>
       {
         recommendations.length > 0
-        ? recommendationList()
-        : 'Loading...'
+        ? (
+          <div>
+            <div className="info-text">
+              Here are your recommendations!
+            </div>
+            {recommendationList()}
+          </div>
+        )
+        : <div className="mid-page padding-bottom">'Loading...'</div>
       }
     </Container>
   );

@@ -1,18 +1,77 @@
 :root {
-  --qd-purple: #c530c5;
-  --qd-green: #21d35d;
+  --tft-green: rgba(0, 181, 91, 1);
+  --tft-yellow: rgba(255, 185, 22, 1);
+  --tft-blue: rgba(63, 144, 223, 1);
+  --tft-grey: #4f4e4e;
 }
 
 .app {
   text-align: center;
   /* background-image: linear-gradient(#FFFFFF, #b8b8b8); */
-  color: black;
+  background-color: var(--tft-grey);
+  color: var(--tft-blue);
+  /* color: black; */
   font-family: "Times New Roman";
   font-size: 1.1em;
+  /* height: 100%; */
 }
 
-
-
 .tft-title {
+  font-size: 3em;
+  /* color: var(--tft-blue); */
+}
 
+.tft-header {
+  background-color: white;
+  border-style: inset;
+  border-color: var(--tft-yellow);
+  background-image: radial-gradient(white, var(--tft-yellow));
+}
+
+.btn, .btn:hover, .btn:active, .btn:focus {
+  background-color: var(--tft-blue);
+  border-color: var(--tft-yellow);
+  border-radius: 25px;
+  font-size: 1.3em;
+}
+
+.btn:hover {
+  border-color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.card {
+  margin-top: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-style: inset;
+  border-width: medium;
+  border-color: var(--tft-yellow);
+  background-image: radial-gradient(white, var(--tft-green));
+}
+
+.card:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.card-title {
+  font-size: 1.5em;
+}
+
+.info-text {
+  /* border-style: inset;
+  border-width: medium;
+  border-color: var(--tft-yellow); */
+  font-size: 1em;
+  /* background-image: linear-gradient(var(--tft-grey), white, var(--tft-grey)); */
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+.mid-page {
+  margin-top: 25%;
+}
+
+.padding-bottom {
+  padding-bottom: 50%;
 }

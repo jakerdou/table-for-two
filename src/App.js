@@ -46,7 +46,7 @@ function App() {
   return (
     <Router>
       <div className='app h-100'>
-        <div className="mt-4">
+        <div>
           {/*
           <Button onClick={getRestaurants}>Get Restaurants</Button>
           <Button onClick={getRecommendations}>Get Recommendations</Button>

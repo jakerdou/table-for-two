@@ -19,27 +19,35 @@ function Home() {
 
   return (
     <Container className='home'>
-      <div>Table for Two</div>
-      <div>"The best restaurants, the cleanest bathrooms"</div>
-      {
-        !surveyStarted
-        ? <Button onClick={handleGetStartedClick}>Click here to get started!</Button>
-        : null
-      }
-      {
-        surveyStarted && !surveyCompleted
-        ? <Survey
-          sampleRestaurants={sampleRestaurants}
-          setSampleRestaurants={setSampleRestaurants}
-          setSurveyCompleted={setSurveyCompleted}
-        />
-        : null
-      }
-      {
-        surveyCompleted
-        ? <Recommendations sampleRestaurants={sampleRestaurants} />
-        : null
-      }
+      <div className="tft-header">
+        <div className="tft-title">Table for Two</div>
+        <div>"The best food, the cleanest bathrooms"</div>
+      </div>
+      <div className="mt-4">
+        {
+          !surveyStarted
+          ? <div className="padding-bottom">
+            <Button onClick={handleGetStartedClick} className="mid-page">
+              Click here to get started!
+            </Button>
+          </div>
+          : null
+        }
+        {
+          surveyStarted && !surveyCompleted
+          ? <Survey
+            sampleRestaurants={sampleRestaurants}
+            setSampleRestaurants={setSampleRestaurants}
+            setSurveyCompleted={setSurveyCompleted}
+          />
+          : null
+        }
+        {
+          surveyCompleted
+          ? <Recommendations sampleRestaurants={sampleRestaurants} />
+          : null
+        }
+      </div>
     </Container>
   );
 }
